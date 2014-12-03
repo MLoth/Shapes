@@ -10,7 +10,7 @@
 <aside class="column nav" id="nav">
 	<nav>
 		<ul class="menu list">
-			<li><a href="index.php" class="menu item home">home</a></li>
+			<li><a href="index.php" class="menu item home">shapes</a></li>
 			<li><a href="rectangle.php" class="menu item rect">rectangles</a></li>
 			<li><a href="triangle.php" class="menu item active tria">triangle</a></li>
 			<li><a href="circle.php" class="menu item circle">circle</a></li>

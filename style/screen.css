@@ -4,11 +4,18 @@ body, html {
 	background: #444;
 	font-family: Liberator, sans-serif;
 	line-height: 1.6em;
-	-webkit-box-sizing: border-box; /* Some mobile browsers. */
-    -moz-box-sizing: border-box; /* Firefox. */
-    box-sizing: border-box; /* All other browsers IE8+. */
+	-webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
     height: 100%;
 }
+a, a:visited {
+	color: #ff6e00;
+}
+a:hover {
+	color: #ffb47f;
+}
+
 
 /*  MAIN STYLE  */
 .column {
@@ -50,7 +57,7 @@ body, html {
 	-o-transition: all 400ms ease-out;
 	transition: all 400ms ease-out;
 }
-.home { color: #eee !important }
+.home { color: #fff !important }
 .rect { color: #BFFF00 !important }
 .tria { color: #1CFEFF !important }
 .circle { color: #F32CCF !important }

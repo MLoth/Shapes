@@ -4,11 +4,11 @@ function init() {
 	checkElements();
 	listeners();
 	setVariables();
-};
+}
 
 function setVariables() {
 	IE = document.all?true:false;
-	colors = [["243","44","207"],["145","77","133"],["192","0","157"]];
+	colors = [["bfff00"],["a9bf67"],["edffba"]];
 	positionOld = { X: 0, Y: 0 };
 	positionNew = { X: width/2, Y: height/2 };
 	positionGone = {X: 0, Y: 0 };
@@ -24,43 +24,24 @@ function onMouseDown(event) {
 	mouse = getMousePosition(window.event);
 	if (checkForMobile()) { breedteNav = 0; hoogteNav = navigationHeight() }
 		else { hoogteNav = 0 };
-	var p = {
-		diameter : Math.floor(Math.random() * 30),
+	var r = {
+		hoogte : Math.floor(Math.random() * 50),
+		breedte : Math.floor(Math.random() * 50),
 		positieX : mouse.posX - breedteNav,
 		positieY : mouse.posY - hoogteNav,
 		opacity : 1
     }
-	draw(p);
-	savePos(p);
+	draw( r );
+	savePos( r );
 }
 
-function savePos( particle ) {
+function savePos( r ) {
 	positionGone = positionOld;
 	positionOld = positionNew;
 	positionNew = {
-		X: particle.positieX,
-		Y: particle.positieY
+		X: r.positieX,
+		Y: r.positieY
 	}
-}
-
-function drawBezier() {
-	var ctx = getContextCanvas();
-	ctx.beginPath();
-	ctx.moveTo(positionOld.X,positionOld.Y);
-
-	var ctrlPoint1 = {
-		X: randomPoint( 20, width ),
-		Y: randomPoint( 20, height )
-	}
-
-	var ctrlPoint2 = {
-		X: randomPoint( 20, width ),
-		Y: randomPoint( 20, height )	
-	}
-
-	ctx.bezierCurveTo(ctrlPoint1.X,ctrlPoint1.Y,ctrlPoint2.X,ctrlPoint2.Y,positionNew.X,positionNew.Y);
-	ctx.strokeStyle = '#ff70c6';
-	ctx.stroke();
 }
 
 function randomPoint( min, max ) {
@@ -134,28 +115,24 @@ function getContextCanvas() {
 	return ctx;
 }
 
-function draw( particle ) {
+function draw( r ) {
 	var ctx = getContextCanvas();
-	ctx.beginPath();
-	ctx.arc(particle.positieX, particle.positieY, particle.diameter, 0, 2 * Math.PI);
 	var color = colors[Math.floor(Math.random() * 3)];
-	fillArc( ctx, color[0], color[1], color[2], 0 );
-    ctx.lineWidth = 0.5;
-}
+    ctx.lineWidth = 0.4;
 
-function fillArc( ctx, r, g, b, a ) {
-	a += 0.1;
-	console.log(a);
+    ctx.beginPath();
 
-	ctx.fillStyle = "rgba(" + r + "," + g + "," + b + "," + a + ")";
-	console.log("rgba(" + r + "," + g + "," + b + "," + a + ")");
- 	ctx.fill();
- 	ctx.restore();
+    // sFunction = function () { fillArc( ctx, r, g, b, a) };
+    
+	// timeoutId = setTimeout(sFunction, 20);
+	// if (a >= 1) {
+	// 	clearTimeout( timeoutId );
+	// 	drawBezier();
+	// };
 
- 	sFunction = function () { fillArc( ctx, r, g, b, a) };
-	timeoutId = setTimeout(sFunction, 20);
-	if (a >= 1) {
-		clearTimeout( timeoutId );
-		drawBezier();
-	};
+    ctx.rect( r.positieX, r.positieY, r.breedte, r.hoogte );
+
+	ctx.fillStyle = "#" + color;
+    ctx.fill();
+
 }
